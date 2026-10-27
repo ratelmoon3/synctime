@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2563eb">
+  <title>SyncTime · 함께 맞추는 일정</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="app-header"><button class="brand" data-action="home"><span class="logo">▦</span> SyncTime</button><span id="breadcrumb"></span><span class="local-label">NEON WORKSPACE</span></header>
+  <main id="app"></main>
+  <dialog id="modal"></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script>
+    // Presentation only: replay the existing home action after its exit animation.
+    (() => {
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const replayed = new WeakSet();
+      let transition = null;
+      let tabAnimation = null;
+      let tabBusy = false;
+      const reset = () => {
+        if (!transition) return;
+        transition.animation.cancel();
+        transition = null;
+      };
+      document.addEventListener('click', async event => {
+        const button = event.target.closest('button');
+        if (!button || replayed.has(button)) return;
+        // Keep navigation fixed and slide only the panel in menu order.
+        if (button.matches('.nav [data-view]')) {
+          const panel = document.querySelector('.workspace .content');
+          if (reduced.matches || !panel?.animate || button.classList.contains('active')) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          if (tabBusy) return;
+          tabBusy = true;
+          const tabs = [...button.closest('.nav').querySelectorAll('[data-view]')];
+          const direction = tabs.indexOf(button) > tabs.findIndex(tab => tab.classList.contains('active')) ? 1 : -1;
+          try {
+            tabAnimation = panel.animate([
+              { transform: 'translateY(0)', opacity: 1 },
+              { transform: `translateY(${-direction * 40}px)`, opacity: .15 }
+            ], { duration: 130, easing: 'ease-in', fill: 'forwards' });
+            await tabAnimation.finished;
+            replayed.add(button);
+            try { button.click(); } finally { replayed.delete(button); }
+            tabAnimation.cancel();
+            const incoming = document.querySelector('.workspace .content');
+            if (incoming && incoming !== panel && !reduced.matches) {
+              tabAnimation = incoming.animate([
+                { transform: `translateY(${direction * 44}px)`, opacity: .15 },
+                { transform: 'translateY(0)', opacity: 1 }
+              ], { duration: 220, easing: 'cubic-bezier(.2,.7,.25,1)' });
+              await tabAnimation.finished;
+            }
+          } catch { /* An interrupted visual transition leaves navigation unchanged. */ }
+          finally { tabAnimation?.cancel(); tabAnimation = null; tabBusy = false; }
+          return;
+        }
+        const home = button.closest('.home');
+        if (!home || !button.matches('[data-action="create"], [data-action="join"], [data-open]')) return;
+        if (reduced.matches || !home.animate) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (transition) return;
+        const animation = home.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: 240, easing: 'ease-out', fill: 'forwards'
+        });
+        const current = transition = { home, animation, replaying: false };
+        try { await animation.finished; } catch { return; }
+        if (transition !== current || !button.isConnected) { reset(); return; }
+        current.replaying = true;
+        replayed.add(button);
+        try { button.click(); } finally { replayed.delete(button); }
+      }, true);
+      // Restore the underlying home when a modal opens or an existing error is shown.
+      new MutationObserver(records => {
+        if (!transition?.replaying) return;
+        if (!transition.home.isConnected || document.getElementById('modal').open ||
+            records.some(record => document.getElementById('toast').contains(record.target))) reset();
+      }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['open', 'style'] });
+      reduced.addEventListener('change', () => {
+        if (reduced.matches && transition && !transition.replaying) transition.animation.finish();
+        if (reduced.matches && tabAnimation) tabAnimation.finish();
+      });
+    })();
+  </script>
+</body>
+</html>

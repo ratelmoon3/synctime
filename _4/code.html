@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SyncTime - 일정 목록</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-secondary": "#ffffff",
+            "on-background": "#0b1c30",
+            "secondary-fixed-dim": "#b7c4ff",
+            "secondary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "tertiary-fixed-dim": "#bec6e0",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#0039b5",
+            "on-tertiary-fixed": "#131b2e",
+            "on-surface": "#0b1c30",
+            "tertiary": "#4d556b",
+            "surface-variant": "#d3e4fe",
+            "tertiary-container": "#656d84",
+            "error-container": "#ffdad6",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "secondary": "#1d4ed8",
+            "on-error": "#ffffff",
+            "on-tertiary-container": "#eef0ff",
+            "primary": "#004ac6",
+            "surface-container-low": "#eff4ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-tint": "#0053db",
+            "background": "#f8f9ff",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed": "#001551",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "surface-dim": "#cbdbf5",
+            "primary-container": "#2563eb",
+            "tertiary-fixed": "#dae2fd",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-surface-variant": "#434655",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-primary-container": "#eeefff",
+            "secondary-container": "#4069f2",
+            "inverse-surface": "#213145",
+            "on-secondary-container": "#fffbff",
+            "surface-bright": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "0.75rem",
+            "space-md": "0.5rem",
+            "gutter-mobile": "0.25rem",
+            "space-xs": "0.125rem",
+            "gutter": "0.5rem",
+            "space-xl": "1rem",
+            "margin": "1rem",
+            "margin-mobile": "0.75rem",
+            "space-sm": "0.25rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "time-mono": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-sm": ["Inter"]
+          },
+          "fontSize": {
+            "title-md": ["14px", {"lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "body-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "time-mono": ["11px", {"lineHeight": "14px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "headline-sm": ["15px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "title-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    body {
+      -webkit-font-smoothing: antialiased;
+      background-color: #f8f9ff;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen pb-24">
+<!-- Top App Bar (Shared Components JSON Anchor) -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface flex justify-between items-center w-full h-11 px-space-xl max-w-full sticky top-0 z-40">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="calendar_month">calendar_month</span>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface">SyncTime</span>
+<span class="text-outline-variant font-body-sm text-body-sm">/</span>
+<span class="text-label-md font-label-md text-on-surface-variant font-medium">프로젝트 X</span>
+</div>
+<div class="flex items-center space-x-2">
+<button class="text-primary dark:text-inverse-primary text-label-md font-label-md hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-150 px-2 py-1 rounded">공유</button>
+</div>
+</header>
+<!-- Title & Controls Header -->
+<div class="px-margin-mobile pt-3 pb-2 bg-surface-container-lowest"><div class="flex items-center justify-between mb-2.5"><div class="flex items-baseline space-x-2"><h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">일정 목록</h1><span class="text-body-sm font-body-sm text-outline">12개 확정</span></div><button class="flex items-center space-x-1 text-on-surface-variant text-label-sm font-label-sm bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant hover:bg-surface-container transition-colors duration-150"><span class="material-symbols-outlined text-outline" data-icon="swap_vert">swap_vert</span><span class="">날짜순 (오름차순)</span></button></div><div class="relative w-full flex items-center mb-2.5"><span class="material-symbols-outlined absolute left-2.5 text-outline" data-icon="search">search</span><input class="w-full h-8 pl-8 pr-3 bg-surface-container-low text-body-md font-body-md border border-outline-variant rounded focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline outline-none transition-colors duration-150" placeholder="일정 이름, 장소, 참여자 검색..." type="text"></div><div class="flex items-center justify-between bg-surface-container-low px-space-md py-1 rounded border border-outline-variant text-label-sm font-label-sm"><div class="flex items-center space-x-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-outline" data-icon="fact_check">fact_check</span><span class="">확정 일정 <strong class="text-on-surface font-semibold">12개</strong></span></div><span class="text-outline-variant">·</span><div class="flex items-center space-x-1.5 text-on-surface-variant"><span class="material-symbols-outlined text-outline" data-icon="schedule">schedule</span><span class="">총 운영 시간 <strong class="text-on-surface font-semibold">28.5시간</strong></span></div></div></div>
+<!-- Main Content Matrix: Groups of Dates -->
+<main class="flex-1 px-margin-mobile pt-3 space-y-4"><section class="space-y-1.5"><div class="flex items-center justify-between px-1 py-1 border-b border-outline-variant"><div class="flex items-baseline space-x-2"><span class="text-title-sm font-title-sm text-primary font-bold">10월 27일 (월)</span><span class="text-label-sm font-label-sm text-outline">5개 일정</span></div><span class="text-time-mono font-time-mono text-outline">09:00 - 18:00</span></div><div class="space-y-1.5"><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#737686]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">09:00 - 11:00</span><span class="bg-[#F8FAFC] border border-[#CBD5E1] text-[#334155] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">세팅</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">조명 및 세팅</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">A Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">최유진, 김태호</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#16a34a]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">11:00 - 13:30</span><span class="bg-[#F0FDF4] border border-[#86EFAC] text-[#14532D] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">연습</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">1부 독무 리허설</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">A Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">이민우, 정다은</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#d97706]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">13:30 - 14:30</span><span class="bg-[#FFFBEB] border border-[#FCD34D] text-[#78350F] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">식사</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">팀 점심 식사</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">회의실</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">전원(5명)</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#ea580c]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">14:30 - 18:00</span><span class="bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">촬영</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">메인 군무 촬영 A</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">A Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">전원(5명)</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#2563eb]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">15:00 - 16:30</span><span class="bg-[#EFF6FF] border border-[#93C5FD] text-[#1E40AF] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">회의</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">B팀 콘티 회의</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">C Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">박서준, 김태호</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article></div></section><section class="space-y-1.5"><div class="flex items-center justify-between px-1 py-1 border-b border-outline-variant"><div class="flex items-baseline space-x-2"><span class="text-title-sm font-title-sm text-primary font-bold">10월 28일 (화)</span><span class="text-label-sm font-label-sm text-outline">2개 일정</span></div><span class="text-time-mono font-time-mono text-outline">10:00 - 19:00</span></div><div class="space-y-1.5"><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#16a34a]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">10:00 - 13:00</span><span class="bg-[#F0FDF4] border border-[#86EFAC] text-[#14532D] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">연습</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">합동 연습 2차</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">A Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">전원(5명)</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article><article class="bg-surface-container-lowest border border-outline-variant rounded p-2.5 relative flex flex-col justify-between hover:bg-surface transition-colors duration-150 border-l-[3px] border-l-[#ea580c]"><div class="flex items-start justify-between"><div class="space-y-1 flex-1 pr-2"><div class="flex items-center space-x-2"><span class="text-time-mono font-time-mono text-on-surface font-semibold">14:00 - 19:00</span><span class="bg-[#FFF7ED] border border-[#FDBA74] text-[#7C2D12] text-label-sm font-label-sm px-1.5 py-0.5 rounded leading-none">촬영</span><h2 class="text-title-sm font-title-sm text-on-surface font-semibold truncate">스튜디오 본촬영</h2></div><div class="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-body-sm font-body-sm text-on-surface-variant"><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="location_on">location_on</span><span class="">A Studio, C Studio</span></span><span class="flex items-center space-x-1"><span class="material-symbols-outlined text-outline" data-icon="group">group</span><span class="">전원(5명)</span></span></div></div><div class="flex items-center space-x-1 shrink-0"><button class="text-outline hover:text-primary p-1 rounded hover:bg-surface-container transition-colors duration-150" title="수정"><span class="material-symbols-outlined text-body-md">edit</span></button><button class="text-outline hover:text-error p-1 rounded hover:bg-error-container transition-colors duration-150" title="삭제"><span class="material-symbols-outlined text-body-md">delete</span></button></div></div></article></div></section></main>
+<!-- Floating Action Button (+ 일정 직접 추가) -->
+<div class="fixed bottom-16 right-4 z-40"><button class="flex items-center space-x-1.5 bg-primary text-on-primary px-3.5 py-2 rounded-full font-label-md text-label-md shadow-md hover:bg-secondary transition-colors duration-150"><span class="material-symbols-outlined" data-icon="add">add</span><span class="">일정 직접 추가</span></button></div>
+<!-- Bottom Navigation Bar (Shared Components JSON Anchor) -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-14 px-space-sm pb-safe"><a class="flex flex-col items-center justify-center text-outline hover:text-on-surface py-1 px-space-md transition-colors duration-150" href="#"><span class="material-symbols-outlined" data-icon="person_check">person_check</span><span class="text-label-sm font-label-sm mt-0.5">내 가능시간</span></a><a class="flex flex-col items-center justify-center text-outline hover:text-on-surface py-1 px-space-md transition-colors duration-150" href="#"><span class="material-symbols-outlined" data-icon="groups">groups</span><span class="text-label-sm font-label-sm mt-0.5">전체 히트맵</span></a><a class="flex flex-col items-center justify-center text-outline hover:text-on-surface py-1 px-space-md transition-colors duration-150" href="#"><span class="material-symbols-outlined" data-icon="grid_view">grid_view</span><span class="text-label-sm font-label-sm mt-0.5">타임테이블</span></a><a class="flex flex-col items-center justify-center text-primary py-1 px-space-md font-semibold" href="#"><span class="material-symbols-outlined text-primary" data-icon="format_list_bulleted">format_list_bulleted</span><span class="text-label-sm font-label-sm mt-0.5">일정 목록</span></a></nav>
+
+
+</body></html>

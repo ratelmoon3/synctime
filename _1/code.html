@@ -1,0 +1,714 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>SyncTime - 내 가능시간 입력</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-secondary": "#ffffff",
+            "on-background": "#0b1c30",
+            "secondary-fixed-dim": "#b7c4ff",
+            "secondary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "tertiary-fixed-dim": "#bec6e0",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#0039b5",
+            "on-tertiary-fixed": "#131b2e",
+            "on-surface": "#0b1c30",
+            "tertiary": "#4d556b",
+            "surface-variant": "#d3e4fe",
+            "tertiary-container": "#656d84",
+            "error-container": "#ffdad6",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "secondary": "#1d4ed8",
+            "on-error": "#ffffff",
+            "on-tertiary-container": "#eef0ff",
+            "primary": "#004ac6",
+            "surface-container-low": "#eff4ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-tint": "#0053db",
+            "background": "#f8f9ff",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed": "#001551",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "surface-dim": "#cbdbf5",
+            "primary-container": "#2563eb",
+            "tertiary-fixed": "#dae2fd",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-surface-variant": "#434655",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-primary-container": "#eeefff",
+            "secondary-container": "#4069f2",
+            "inverse-surface": "#213145",
+            "on-secondary-container": "#fffbff",
+            "surface-bright": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "0.75rem",
+            "space-md": "0.5rem",
+            "gutter-mobile": "0.25rem",
+            "space-xs": "0.125rem",
+            "gutter": "0.5rem",
+            "space-xl": "1rem",
+            "margin": "1rem",
+            "margin-mobile": "0.75rem",
+            "space-sm": "0.25rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "time-mono": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-sm": ["Inter"]
+          },
+          "fontSize": {
+            "title-md": ["14px", {"lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+            "body-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "time-mono": ["11px", {"lineHeight": "14px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "headline-sm": ["15px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-md": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+            "body-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400"}],
+            "title-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .grid-cell-h {
+      height: 28px;
+    }
+    .user-select-none {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased flex flex-col h-screen overflow-hidden user-select-none">
+<!-- Top App Bar (Shared Anchor Component) -->
+<header class="bg-surface-container-lowest text-primary flex justify-between items-center w-full h-11 px-space-xl max-w-full z-40 shrink-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="calendar_month">calendar_month</span>
+<h1 class="text-headline-sm font-headline-sm font-semibold tracking-tight text-on-surface">SyncTime</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:bg-surface-container transition-colors duration-150 rounded-DEFAULT p-1 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications">notifications</span>
+</button>
+<button class="text-label-md font-label-md text-primary font-medium hover:bg-surface-container transition-colors duration-150 px-2 py-0.5 rounded-DEFAULT" type="button">
+        공유
+      </button>
+</div>
+</header>
+<!-- Project Header Bar -->
+<div class="bg-surface-container-lowest px-space-md py-2 border-t border-surface-container-low shrink-0 shadow-sm z-30">
+<div class="flex items-center justify-between gap-2">
+<div class="min-w-0 flex-1">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="bg-surface-container-high text-primary px-1.5 py-0.5 rounded-DEFAULT font-label-sm text-label-sm font-semibold">10.26(일) - 11.01(토)</span>
+<span class="bg-surface-container text-on-surface-variant px-1.5 py-0.5 rounded-DEFAULT font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary" data-icon="account_circle">account_circle</span>
+            참여자: 이민우
+          </span>
+</div>
+<h2 class="text-title-sm font-title-sm text-on-surface truncate">프로젝트 X 촬영/연습 일정</h2>
+</div>
+<button class="bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md px-3 py-1.5 rounded-DEFAULT font-semibold shrink-0 shadow-sm transition-colors duration-150 flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-primary" data-icon="check">check</span>
+        저장
+      </button>
+</div>
+<!-- Instructions & Quick Select Buttons -->
+<div class="flex items-center justify-between gap-2 mt-2 pt-1.5 border-t border-surface-container">
+<div class="inline-flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-low px-2 py-0.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="touch_app">touch_app</span>
+<span class="truncate">시간대를 탭하거나 드래그하여 선택 (30분 단위)</span>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant font-label-sm text-label-sm text-on-surface-variant px-2 py-0.5 rounded-DEFAULT transition-colors" id="quick-clear-btn" type="button">
+          전체 해제
+        </button>
+<button class="bg-surface-container-high hover:bg-surface-variant text-primary font-label-sm text-label-sm font-medium px-2 py-0.5 rounded-DEFAULT transition-colors" id="quick-eve-btn" type="button">
+          평일 저녁 일괄 선택
+        </button>
+</div>
+</div>
+</div>
+<!-- Synchronized Time Table Matrix Grid -->
+<div class="flex-1 flex flex-col min-h-0 bg-surface relative overflow-hidden">
+<!-- Pinned Day Matrix Header -->
+<div class="flex bg-surface-container-lowest border-b border-outline-variant/60 z-20 shrink-0">
+<!-- Fixed Left Corner over Time Ruler -->
+<div class="w-14 shrink-0 bg-surface-container-low border-r border-outline-variant/60 flex flex-col justify-center items-center py-1">
+<span class="text-label-sm font-label-sm text-outline font-medium">시간</span>
+</div>
+<!-- Scrollable Day Columns Header -->
+<div class="flex-1 flex overflow-x-auto custom-scroll" id="day-header-scroll">
+<div class="flex min-w-[560px] w-full">
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-error">10/26(일)</span>
+<span class="block text-[10px] text-outline font-medium">0명 선택</span>
+</div>
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-on-surface">10/27(월)</span>
+<span class="block text-[10px] text-primary font-semibold">4슬롯</span>
+</div>
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-low/50 relative">
+<span class="block text-label-sm font-label-sm font-semibold text-primary">10/28(화)</span>
+<span class="block text-[10px] text-primary font-semibold">4슬롯</span>
+<div class="absolute bottom-0 left-0 right-0 h-[2px] bg-primary-container"></div>
+</div>
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-on-surface">10/29(수)</span>
+<span class="block text-[10px] text-primary font-semibold">4슬롯</span>
+</div>
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-on-surface">10/30(목)</span>
+<span class="block text-[10px] text-outline font-medium">0명 선택</span>
+</div>
+<div class="flex-1 text-center py-1 border-r border-outline-variant/40 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-on-surface">10/31(금)</span>
+<span class="block text-[10px] text-primary font-semibold">2슬롯</span>
+</div>
+<div class="flex-1 text-center py-1 bg-surface-container-lowest">
+<span class="block text-label-sm font-label-sm font-semibold text-secondary">11/01(토)</span>
+<span class="block text-[10px] text-outline font-medium">0명 선택</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Timetable Canvas -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden flex bg-surface" id="grid-vertical-scroll">
+<!-- Fixed Left Time Gutter (09:00 to 22:00) -->
+<div class="w-14 shrink-0 bg-surface-container-low border-r border-outline-variant/60 select-none z-10">
+<!-- 09:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">09:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">09:30</span>
+</div>
+<!-- 10:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">10:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">10:30</span>
+</div>
+<!-- 11:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">11:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">11:30</span>
+</div>
+<!-- 12:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">12:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">12:30</span>
+</div>
+<!-- 13:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">13:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">13:30</span>
+</div>
+<!-- 14:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">14:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">14:30</span>
+</div>
+<!-- 15:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">15:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">15:30</span>
+</div>
+<!-- 16:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">16:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">16:30</span>
+</div>
+<!-- 17:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">17:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">17:30</span>
+</div>
+<!-- 18:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">18:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">18:30</span>
+</div>
+<!-- 19:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">19:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">19:30</span>
+</div>
+<!-- 20:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">20:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">20:30</span>
+</div>
+<!-- 21:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">21:00</span>
+</div>
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-[10px] text-outline">21:30</span>
+</div>
+<!-- 22:00 -->
+<div class="grid-cell-h flex items-start justify-end pr-2 pt-0.5 border-b border-outline-variant/40">
+<span class="font-time-mono text-time-mono text-on-surface-variant font-semibold">22:00</span>
+</div>
+</div>
+<!-- Synchronized 7-Column Slots Matrix -->
+<div class="flex-1 flex overflow-x-auto custom-scroll" id="grid-horizontal-scroll">
+<div class="flex min-w-[560px] w-full relative">
+<!-- Column 0: 10/26(일) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<!-- 27 slots (09:00 - 22:00) -->
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 1: 10/27(월) (Selected slots: 18:00 - 20:00 -> 4 slots) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<!-- 18:00 (index 18) Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 18:30 (index 19) Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:00 (index 20) Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:30 (index 21) Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 2: 10/28(화) (Selected slots: 18:00 - 20:00 -> 4 slots) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<!-- 18:00 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 18:30 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:00 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:30 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 3: 10/29(수) (Selected slots: 18:00 - 20:00 -> 4 slots) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<!-- 18:00 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 18:30 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:00 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:30 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 4: 10/30(목) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 5: 10/31(금) (Selected slots: 19:00 - 20:00 -> 2 slots) -->
+<div class="flex-1 flex flex-col border-r border-outline-variant/40 bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<!-- 19:00 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<!-- 19:30 Selected -->
+<div class="grid-cell-h border-b border-blue-600 bg-primary-container text-on-primary flex items-center justify-center cursor-pointer slot-cell is-selected">
+<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>
+</div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+<!-- Column 6: 11/01(토) -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest">
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+<div class="grid-cell-h border-b border-outline-variant/30 hover:bg-surface-container-low cursor-pointer slot-cell"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Sticky Bottom Counter & Submit Bar -->
+<div class="shrink-0 bg-surface-container-lowest px-4 py-2 border-t border-outline-variant/50 shadow-md flex items-center justify-between gap-3 z-30">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container inline-block"></span>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">선택됨:</span>
+<span class="text-title-sm font-title-sm text-on-surface font-semibold" id="selected-summary">14개 시간대 (7시간)</span>
+</div>
+<span class="text-[10px] text-outline">최종 반영 전 '저장 완료'를 탭하세요</span>
+</div>
+<button class="bg-primary hover:bg-secondary active:bg-primary text-on-primary font-title-sm text-title-sm px-4 py-2 rounded-DEFAULT font-semibold shadow-sm transition-colors duration-150 flex items-center gap-1.5 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px] text-on-primary" data-icon="cloud_done">cloud_done</span>
+<span class="">가능 시간 저장 완료</span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation Bar (Shared Anchor Component) -->
+<!-- Mapped destination 0: '내 가능시간' (Active) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-14 px-space-sm pb-safe bg-surface-container-lowest text-primary">
+<!-- Tab 1: 내 가능시간 (Active destination for availability entry) -->
+<button class="flex flex-col items-center justify-center bg-surface-container text-primary rounded-DEFAULT py-1 px-space-md hover:bg-surface-container-low transition-colors duration-150 active:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_check">person_check</span>
+<span class="text-label-sm font-label-sm font-semibold">내 가능시간</span>
+</button>
+<!-- Tab 2: 전체 히트맵 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-space-md hover:bg-surface-container-low transition-colors duration-150 active:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+<span class="text-label-sm font-label-sm">전체 히트맵</span>
+</button>
+<!-- Tab 3: 타임테이블 -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-space-md hover:bg-surface-container-low transition-colors duration-150 active:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="grid_view">grid_view</span>
+<span class="text-label-sm font-label-sm">타임테이블</span>
+</button>
+<!-- Tab 4: 일정 목록 -->
+
+</nav>
+<!-- Interaction Logic for Toggling Slots and Synchronized Horizontal Scroll -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Synchronize horizontal scrolling between Header days & Body grid
+      const headerScroll = document.getElementById('day-header-scroll');
+      const gridScroll = document.getElementById('grid-horizontal-scroll');
+      
+      let isHeaderScrolling = false;
+      let isGridScrolling = false;
+
+      headerScroll.addEventListener('scroll', () => {
+        if (!isGridScrolling) {
+          isHeaderScrolling = true;
+          gridScroll.scrollLeft = headerScroll.scrollLeft;
+        }
+        isGridScrolling = false;
+      });
+
+      gridScroll.addEventListener('scroll', () => {
+        if (!isHeaderScrolling) {
+          isGridScrolling = true;
+          headerScroll.scrollLeft = gridScroll.scrollLeft;
+        }
+        isHeaderScrolling = false;
+      });
+
+      const summaryText = document.getElementById('selected-summary');
+      const cells = document.querySelectorAll('.slot-cell');
+
+      function updateSummary() {
+        const count = document.querySelectorAll('.slot-cell.is-selected').length;
+        const hours = (count * 0.5).toFixed(1).replace('.0', '');
+        summaryText.textContent = `${count}개 시간대 (${hours}시간)`;
+      }
+
+      // Slot Click / Tap Toggle
+      cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+          if (cell.classList.contains('is-selected')) {
+            cell.classList.remove('is-selected', 'bg-primary-container', 'text-on-primary', 'border-blue-600');
+            cell.classList.add('border-outline-variant/30', 'hover:bg-surface-container-low');
+            cell.innerHTML = '';
+          } else {
+            cell.classList.add('is-selected', 'bg-primary-container', 'text-on-primary', 'border-blue-600');
+            cell.classList.remove('border-outline-variant/30', 'hover:bg-surface-container-low');
+            cell.innerHTML = '<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>';
+          }
+          updateSummary();
+        });
+      });
+
+      // Quick Clear Button
+      const clearBtn = document.getElementById('quick-clear-btn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          document.querySelectorAll('.slot-cell.is-selected').forEach(cell => {
+            cell.classList.remove('is-selected', 'bg-primary-container', 'text-on-primary', 'border-blue-600');
+            cell.classList.add('border-outline-variant/30', 'hover:bg-surface-container-low');
+            cell.innerHTML = '';
+          });
+          updateSummary();
+        });
+      }
+
+      // Quick Evening Select Button (Mon-Fri 18:00 - 21:00 slots)
+      const eveBtn = document.getElementById('quick-eve-btn');
+      if (eveBtn) {
+        eveBtn.addEventListener('click', () => {
+          // Select weekdays (columns 1 to 5) evening slots (indices 18 to 23: 18:00, 18:30, 19:00, 19:30, 20:00, 20:30)
+          const columns = document.querySelectorAll('#grid-horizontal-scroll > div > div');
+          columns.forEach((col, colIdx) => {
+            if (colIdx >= 1 && colIdx <= 5) {
+              const colCells = col.querySelectorAll('.slot-cell');
+              [18, 19, 20, 21, 22, 23].forEach(idx => {
+                if (colCells[idx] && !colCells[idx].classList.contains('is-selected')) {
+                  colCells[idx].classList.add('is-selected', 'bg-primary-container', 'text-on-primary', 'border-blue-600');
+                  colCells[idx].classList.remove('border-outline-variant/30', 'hover:bg-surface-container-low');
+                  colCells[idx].innerHTML = '<span class="material-symbols-outlined text-[13px]" data-icon="check">check</span>';
+                }
+              });
+            }
+          });
+          updateSummary();
+        });
+      }
+    });
+  </script>
+
+
+</body></html>

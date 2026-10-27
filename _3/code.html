@@ -1,0 +1,606 @@
+<!DOCTYPE html><html class="light" lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>SyncTime - 최종 주간 타임테이블</title>
+<!-- Material Symbols Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-secondary": "#ffffff",
+            "on-background": "#0b1c30",
+            "secondary-fixed-dim": "#b7c4ff",
+            "secondary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "tertiary-fixed-dim": "#bec6e0",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#0039b5",
+            "on-tertiary-fixed": "#131b2e",
+            "on-surface": "#0b1c30",
+            "tertiary": "#4d556b",
+            "surface-variant": "#d3e4fe",
+            "tertiary-container": "#656d84",
+            "error-container": "#ffdad6",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "secondary": "#1d4ed8",
+            "on-error": "#ffffff",
+            "on-tertiary-container": "#eef0ff",
+            "primary": "#004ac6",
+            "surface-container-low": "#eff4ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-tint": "#0053db",
+            "background": "#f8f9ff",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed": "#001551",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "surface-dim": "#cbdbf5",
+            "primary-container": "#2563eb",
+            "tertiary-fixed": "#dae2fd",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-surface-variant": "#434655",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-primary-container": "#eeefff",
+            "secondary-container": "#4069f2",
+            "inverse-surface": "#213145",
+            "on-secondary-container": "#fffbff",
+            "surface-bright": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "0.75rem",
+            "space-md": "0.5rem",
+            "gutter-mobile": "0.25rem",
+            "space-xs": "0.125rem",
+            "gutter": "0.5rem",
+            "space-xl": "1rem",
+            "margin": "1rem",
+            "margin-mobile": "0.75rem",
+            "space-sm": "0.25rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "time-mono": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-sm": ["Inter"]
+          },
+          "fontSize": {
+            "title-md": ["14px", { "lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "time-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "title-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3c6d7;
+      border-radius: 2px;
+    }
+    .hour-row {
+      height: 64px; /* 32px per 30-minute unit */
+    }
+    .grid-cell {
+      height: 64px;
+      background-size: 100% 32px;
+      background-image: linear-gradient(to bottom, transparent 31px, #eff4ff 31px, #eff4ff 32px, transparent 32px);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased select-none overflow-x-hidden pb-16 flex flex-col min-h-screen">
+<!-- ================= TOP APP BAR (Shared Anchor) ================= -->
+<header class="flex justify-between items-center w-full h-11 px-space-xl max-w-full bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline sticky top-0 z-40">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="calendar_month">calendar_month</span>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface">SyncTime</span>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="flex items-center gap-space-xs px-space-sm py-0.5 rounded-DEFAULT bg-surface-container-low text-primary text-label-md font-label-md hover:bg-surface-container transition-colors duration-150" title="공유">
+<span class="material-symbols-outlined text-[16px]" data-icon="ios_share">ios_share</span>
+<span class="">공유</span>
+</button>
+</div>
+</header>
+<!-- ================= CONTROL & CALL-SHEET HEADER ================= -->
+<section class="bg-surface-container-lowest border-b border-outline-variant px-space-md py-space-sm shadow-sm flex flex-col gap-space-sm z-30"><!-- Call Sheet Meta Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-primary/10 text-primary font-semibold rounded text-[11px] font-time-mono tracking-wide">MASTER CALL SHEET</span>
+<h1 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-1.5">
+<span class="font-bold text-[15px]">프로젝트 X</span>
+<span class="text-tertiary font-normal text-body-sm">(W43)</span>
+</h1>
+</div>
+<!-- Export Actions -->
+<div class="flex items-center gap-2">
+<span class="text-time-mono font-time-mono text-tertiary hidden sm:inline text-[11px]">10.26 - 11.01</span>
+<button class="h-6 px-2 border border-outline-variant/60 rounded bg-surface hover:bg-surface-container-low flex items-center gap-1 text-on-surface-variant text-[11px] font-medium transition-colors" title="PDF/이미지 내보내기">
+<span class="material-symbols-outlined text-[14px] text-tertiary" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="">내보내기</span>
+</button>
+</div>
+</div>
+<!-- Segmented Venue Filter -->
+<div class="flex items-center justify-between pt-0.5">
+<div class="inline-flex p-0.5 bg-surface-container rounded gap-0.5 text-[12px] font-medium overflow-x-auto custom-scrollbar">
+<button class="h-6 px-2.5 rounded bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all shrink-0">전체 장소</button>
+<button class="h-6 px-2.5 rounded text-tertiary hover:text-on-surface transition-colors shrink-0">A Studio</button>
+<button class="h-6 px-2.5 rounded text-tertiary hover:text-on-surface transition-colors shrink-0">C Studio</button>
+<button class="h-6 px-2.5 rounded text-tertiary hover:text-on-surface transition-colors shrink-0">회의실</button>
+</div>
+<!-- Clean Minimal Legend -->
+<div class="hidden sm:flex items-center gap-2.5 text-[11px] text-tertiary pl-2">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#16A34A]"></span>연습</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#EA580C]"></span>촬영</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#2563EB]"></span>회의</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#D97706]"></span>식사</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-[#64748B]"></span>세팅</span>
+</div>
+<span class="text-[10px] text-tertiary font-time-mono sm:hidden shrink-0">30분 그리드</span>
+</div></section>
+<!-- ================= MASTER MULTI-VENUE TIMETABLE CANVAS ================= -->
+<main class="flex-1 overflow-x-auto overflow-y-auto custom-scrollbar relative bg-surface-container-lowest">
+<!-- Table Header (Sticky) -->
+<div class="sticky top-0 z-20 flex bg-surface border-b border-outline-variant divide-x divide-outline-variant min-w-[760px] shadow-sm"><!-- Corner Time Gutter Label -->
+<div class="w-14 shrink-0 flex flex-col justify-center items-center py-1 bg-surface-container-low text-tertiary font-time-mono text-[10px] border-r border-[#CBD5E1]">
+<span class="">TIME</span>
+<span class="">(KST)</span>
+</div>
+<!-- Date Group 1: 10/27 (월) -->
+<div class="flex-1 min-w-[200px] flex flex-col border-r border-[#CBD5E1]">
+<div class="h-6 flex items-center justify-between px-2.5 bg-surface text-on-surface border-b border-[#CBD5E1] text-[12px]">
+<span class="font-semibold">10/27(월)</span>
+<span class="text-[10px] font-time-mono text-tertiary">2개 베뉴</span>
+</div>
+<div class="grid grid-cols-2 divide-x divide-[#CBD5E1] text-center bg-surface-container-lowest h-6 text-[11px] font-medium text-tertiary">
+<div class="py-1">A Studio</div>
+<div class="py-1">C Studio</div>
+</div>
+</div>
+<!-- Date Group 2: 10/28 (화) - Active Focus -->
+<div class="flex-[1.5] min-w-[300px] flex flex-col border-r border-[#CBD5E1] bg-primary-fixed/30">
+<div class="h-6 flex items-center justify-between px-2.5 bg-[#EFF6FF] text-primary border-b border-[#BFDBFE] text-[12px]">
+<span class="font-bold flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+10/28(화)
+</span>
+<span class="text-[10px] font-time-mono text-primary font-medium">3개 베뉴 (집중일정)</span>
+</div>
+<div class="grid grid-cols-3 divide-x divide-[#CBD5E1] text-center bg-surface-container-lowest h-6 text-[11px] font-medium text-on-surface-variant">
+<div class="py-1 font-semibold text-primary bg-primary-fixed/30">A Studio</div>
+<div class="py-1">C Studio</div>
+<div class="py-1">회의실</div>
+</div>
+</div>
+<!-- Date Group 3: 10/29 (수) -->
+<div class="flex-1 min-w-[200px] flex flex-col">
+<div class="h-6 flex items-center justify-between px-2.5 bg-surface text-on-surface border-b border-[#CBD5E1] text-[12px]">
+<span class="font-semibold">10/29(수)</span>
+<span class="text-[10px] font-time-mono text-tertiary">2개 베뉴</span>
+</div>
+<div class="grid grid-cols-2 divide-x divide-[#CBD5E1] text-center bg-surface-container-lowest h-6 text-[11px] font-medium text-tertiary">
+<div class="py-1">A Studio</div>
+<div class="py-1">C Studio</div>
+</div>
+</div></div>
+<!-- Matrix Rows & Events Layer Container -->
+<div class="relative min-w-[760px] flex">
+<!-- Left Vertical Time Gutter (09:00 - 22:00) -->
+<div class="w-14 shrink-0 flex flex-col border-r border-outline-variant bg-surface select-none z-10">
+<!-- 09:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">09:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 10:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">10:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 11:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">11:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 12:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">12:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 13:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">13:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 14:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">14:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 15:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">15:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 16:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">16:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 17:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">17:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 18:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">18:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 19:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">19:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 20:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">20:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+<!-- 21:00 -->
+<div class="hour-row border-b border-outline-variant relative flex flex-col justify-between pr-1.5 text-right font-time-mono text-time-mono text-tertiary">
+<span class="leading-none pt-1">21:00</span>
+<span class="text-[9px] text-outline-variant leading-none pb-0.5">30</span>
+</div>
+</div>
+<!-- Schedule Columns (Total 7 columns across 3 days) -->
+<div class="flex-1 grid grid-cols-7 divide-x divide-outline-variant relative">
+<!-- ================= Column 1: 10/27 - A Studio ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<!-- Event Ghost Placeholder for Mon (Early Setup) -->
+<div class="absolute top-[64px] inset-x-0.5 h-[96px] bg-[#F8FAFC] border border-[#CBD5E1] border-l-[3px] border-l-[#64748B] rounded-DEFAULT p-1 text-[10px] overflow-hidden opacity-85">
+<span class="font-bold text-[#334155] block truncate">무대 장비 반입</span>
+<span class="font-time-mono text-[9px] text-tertiary">10:00~11:30</span>
+</div>
+</div>
+<!-- ================= Column 2: 10/27 - C Studio ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+</div>
+<!-- ================= Column 3: 10/28 - A Studio (PRIMARY DISCIPLINARY STAGE) ================= -->
+<div class="relative bg-surface-container-lowest">
+<!-- Background Grid Ticks -->
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<!-- EVENT 1: 조명 및 카메라 세팅 (09:00~11:00, 2h = 128px) -->
+<!-- Top: 0px (09:00) | Height: 128px -->
+<div class="absolute top-[0px] inset-x-0.5 h-[126px] bg-[#F8FAFC] border border-[#CBD5E1] border-l-[3px] border-l-[#64748B] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#64748B] cursor-pointer group">
+<div>
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="inline-flex px-1 py-0.2 bg-[#E2E8F0] text-[#334155] rounded-DEFAULT text-[9px] font-semibold leading-tight">세팅</span>
+<span class="text-time-mono font-time-mono text-[9px] text-[#475569]">A Studio</span>
+</div>
+<div class="text-title-sm font-title-sm text-[#1E293B] font-bold leading-tight line-clamp-2">
+                조명 및 카메라 세팅
+              </div>
+</div>
+<div class="border-t border-[#E2E8F0] pt-1 mt-1">
+<div class="text-time-mono font-time-mono text-[#475569] text-[10px] font-semibold">
+                09:00 ~ 11:00
+              </div>
+<div class="text-[10px] text-[#64748B] truncate flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[11px]" data-icon="person">person</span>
+                최유진, 김태호
+              </div>
+</div>
+<!-- Edit/Delete Micro Actions Hover Indicator -->
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+<!-- EVENT 2: 1부 독무 리허설 (11:00~13:30, 2.5h = 160px) -->
+<!-- Top: 128px (11:00) | Height: 160px -->
+<div class="absolute top-[128px] inset-x-0.5 h-[158px] bg-[#F0FDF4] border border-[#86EFAC] border-l-[3px] border-l-[#16A34A] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#16A34A] cursor-pointer group">
+<div>
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="inline-flex px-1 py-0.2 bg-[#DCFCE7] text-[#14532D] rounded-DEFAULT text-[9px] font-semibold leading-tight">연습</span>
+<span class="text-time-mono font-time-mono text-[9px] text-[#15803D]">A Studio</span>
+</div>
+<div class="text-title-sm font-title-sm text-[#0F5132] font-bold leading-tight">
+                1부 독무 리허설
+              </div>
+</div>
+<div class="border-t border-[#BBF7D0] pt-1 mt-1">
+<div class="text-time-mono font-time-mono text-[#14532D] text-[10px] font-semibold">
+                11:00 ~ 13:30
+              </div>
+<div class="text-[10px] text-[#166534] truncate flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[11px]" data-icon="person">person</span>
+                이민우, 정다은
+              </div>
+</div>
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+<!-- EVENT 4: 메인 군무 촬영 A (14:30~18:00, 3.5h = 224px) -->
+<!-- Top: 14:30 = 5.5 hours from 09:00 = 5.5 * 64px = 352px | Height: 224px -->
+<div class="absolute top-[352px] inset-x-0.5 h-[222px] bg-[#FFF7ED] border border-[#FDBA74] border-l-[3px] border-l-[#EA580C] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#EA580C] cursor-pointer group" onclick="document.getElementById('schedule-edit-modal').classList.remove('hidden')">
+<div>
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="inline-flex px-1 py-0.2 bg-[#FFEDD5] text-[#9A3412] rounded-DEFAULT text-[9px] font-semibold leading-tight">촬영</span>
+<span class="text-time-mono font-time-mono text-[9px] text-[#C2410C]">A Studio</span>
+</div>
+<div class="text-title-sm font-title-sm text-[#7C2D12] font-bold leading-tight line-clamp-2">
+                메인 군무 촬영 A
+              </div>
+<p class="text-[10px] text-[#9A3412] mt-0.5 leading-tight">풀 샷 &amp; 크레인 무빙</p>
+</div>
+<div class="border-t border-[#FED7AA] pt-1 mt-1 bg-white/40 p-1 rounded-DEFAULT">
+<div class="text-time-mono font-time-mono text-[#C2410C] text-[10px] font-bold">
+                14:30 ~ 18:00
+              </div>
+<div class="text-[10px] text-[#7C2D12] font-medium truncate flex items-center gap-0.5 mt-0.5">
+<span class="material-symbols-outlined text-[12px] text-[#EA580C]" data-icon="groups">groups</span>
+                전원(5명)
+              </div>
+</div>
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+</div>
+<!-- ================= Column 4: 10/28 - C Studio ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<!-- EVENT 5: B팀 콘티 회의 (15:00~16:30, 1.5h = 96px) -->
+<!-- Top: 15:00 = 6 hours from 09:00 = 6 * 64px = 384px | Height: 96px -->
+<div class="absolute top-[384px] inset-x-0.5 h-[94px] bg-[#EFF6FF] border border-[#93C5FD] border-l-[3px] border-l-[#2563EB] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#2563EB] cursor-pointer group">
+<div>
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="inline-flex px-1 py-0.2 bg-[#DBEAFE] text-[#1E40AF] rounded-DEFAULT text-[9px] font-semibold leading-tight">회의</span>
+<span class="text-time-mono font-time-mono text-[9px] text-[#2563EB]">C Studio</span>
+</div>
+<div class="text-title-sm font-title-sm text-[#1E3A8A] font-bold leading-tight truncate">
+                B팀 콘티 회의
+              </div>
+</div>
+<div class="border-t border-[#BFDBFE] pt-1">
+<div class="text-time-mono font-time-mono text-[#1D4ED8] text-[10px] font-semibold">
+                15:00 ~ 16:30
+              </div>
+<div class="text-[10px] text-[#1E40AF] truncate flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]" data-icon="person">person</span>
+                박서준, 김태호
+              </div>
+</div>
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+</div>
+<!-- ================= Column 5: 10/28 - 회의실 ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<!-- EVENT 3: 팀 점심 식사 (13:30~14:30, 1h = 64px) -->
+<!-- Top: 13:30 = 4.5 hours from 09:00 = 4.5 * 64px = 288px | Height: 64px -->
+<div class="absolute top-[288px] inset-x-0.5 h-[62px] bg-[#FFFBEB] border border-[#FCD34D] border-l-[3px] border-l-[#D97706] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#D97706] cursor-pointer group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="inline-flex px-1 py-0.2 bg-[#FEF3C7] text-[#92400E] rounded-DEFAULT text-[9px] font-semibold leading-tight">식사</span>
+<span class="text-title-sm font-title-sm text-[#78350F] font-bold leading-tight">팀 점심 식사</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[10px] font-time-mono border-t border-[#FDE68A] pt-0.5">
+<span class="text-[#B45309] font-bold">13:30~14:30</span>
+<span class="text-[#92400E] font-medium flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]" data-icon="restaurant">restaurant</span>
+                전원(5명)
+              </span>
+</div>
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+<!-- EVENT 6: 촬영본 피드백 & 모니터링 (18:30~20:00, 1.5h = 96px) -->
+<!-- Top: 18:30 = 9.5 hours from 09:00 = 9.5 * 64px = 608px | Height: 96px -->
+<div class="absolute top-[608px] inset-x-0.5 h-[94px] bg-[#EFF6FF] border border-[#93C5FD] border-l-[3px] border-l-[#2563EB] rounded-DEFAULT p-1.5 flex flex-col justify-between overflow-hidden shadow-sm transition-all hover:ring-1 hover:ring-[#2563EB] cursor-pointer group">
+<div>
+<div class="flex items-center justify-between gap-1 mb-0.5">
+<span class="inline-flex px-1 py-0.2 bg-[#DBEAFE] text-[#1E40AF] rounded-DEFAULT text-[9px] font-semibold leading-tight">회의</span>
+<span class="text-time-mono font-time-mono text-[9px] text-[#2563EB]">회의실</span>
+</div>
+<div class="text-title-sm font-title-sm text-[#1E3A8A] font-bold leading-tight line-clamp-2">
+                촬영본 피드백 &amp; 모니터링
+              </div>
+</div>
+<div class="border-t border-[#BFDBFE] pt-1">
+<div class="text-time-mono font-time-mono text-[#1D4ED8] text-[10px] font-semibold">
+                18:30 ~ 20:00
+              </div>
+<div class="text-[10px] text-[#1E40AF] truncate flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]" data-icon="groups">groups</span>
+                전원(5명)
+              </div>
+</div>
+<div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 flex items-center gap-0.5 bg-white/90 p-0.5 rounded shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-tertiary hover:text-primary" data-icon="edit">edit</span>
+</div>
+</div>
+</div>
+<!-- ================= Column 6: 10/29 - A Studio ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<!-- Wed Planned Block -->
+<div class="absolute top-[192px] inset-x-0.5 h-[126px] bg-[#F0FDF4] border border-[#86EFAC] border-l-[3px] border-l-[#16A34A] rounded-DEFAULT p-1 text-[10px] overflow-hidden opacity-90">
+<span class="font-bold text-[#14532D] block truncate">보충 컷 촬영 &amp; 클린업</span>
+<span class="font-time-mono text-[9px] text-[#166534]">12:00~14:00</span>
+</div>
+</div>
+<!-- ================= Column 7: 10/29 - C Studio ================= -->
+<div class="relative bg-surface-container-lowest">
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+<div class="hour-row grid-cell border-b border-outline-variant"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= BOTTOM NAVIGATION BAR (Shared Component Anchor) ================= -->
+<!-- Contextual Active: '타임테이블' (Index 2 in label_texts) is active -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-14 px-space-sm pb-safe bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline shadow-sm">
+<!-- Item 0: 내 가능시간 (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 active:bg-surface-container dark:active:bg-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="person_check">person_check</span>
+<span class="text-label-sm font-label-sm mt-0.5">내 가능시간</span>
+</a>
+<!-- Item 1: 전체 히트맵 (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 active:bg-surface-container dark:active:bg-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+<span class="text-label-sm font-label-sm mt-0.5">전체 히트맵</span>
+</a>
+<!-- Item 2: 타임테이블 (ACTIVE - Exact Match Hierarchy) -->
+<a class="flex flex-col items-center justify-center bg-surface-container dark:bg-surface-variant text-primary dark:text-primary-fixed rounded-DEFAULT py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 active:bg-surface-container dark:active:bg-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-sm font-label-sm font-semibold mt-0.5">타임테이블</span>
+</a>
+<!-- Item 3: 일정 목록 (Inactive) -->
+
+</nav>
+<!-- Interactive Action Toast Indicator (Micro-Interaction) -->
+<div class="fixed bottom-16 left-1/2 -translate-x-1/2 bg-on-background text-on-primary px-3 py-1.5 rounded-DEFAULT shadow-lg text-[11px] font-label-sm flex items-center gap-2 z-40 transition-transform duration-200" id="selection-banner"><div class="flex items-center gap-2 font-medium tracking-tight"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span><span class="">10/28(화) 마스터 콜시트 (5개 세션)</span></div><button onclick="document.getElementById('schedule-edit-modal').classList.remove('hidden')" class="ml-2 px-2 py-0.5 rounded bg-primary text-white text-[10px] font-semibold hover:bg-secondary transition-colors flex items-center gap-0.5"><span class="material-symbols-outlined text-[12px]">edit_calendar</span>일정 빠른 수정</button><button class="text-slate-400 hover:text-white ml-1 transition-colors flex items-center" onclick="this.closest('#selection-banner').remove()"><span class="material-symbols-outlined text-[13px]" data-icon="close">close</span></button></div>
+
+
+<div id="schedule-edit-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-xs transition-opacity"><div class="bg-surface-container-lowest w-full max-w-lg rounded-t-xl sm:rounded-xl shadow-lg border border-outline-variant p-4 flex flex-col gap-3 max-h-[90vh] overflow-y-auto custom-scrollbar"><div class="flex items-center justify-between border-b border-outline-variant pb-2.5"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[20px]">edit_calendar</span><h2 class="text-headline-sm font-bold text-on-surface">일정 상세 수정 &amp; 관리</h2></div><button onclick="document.getElementById('schedule-edit-modal').classList.add('hidden')" class="text-tertiary hover:text-on-surface p-1 rounded"><span class="material-symbols-outlined text-[18px]">close</span></button></div><div class="flex flex-col gap-3 text-body-sm"><div class="flex flex-col gap-1"><label class="font-semibold text-on-surface text-[12px]">일정명</label><input type="text" value="메인 군무 촬영 A" class="h-8 px-2.5 border border-outline-variant rounded bg-surface text-on-surface text-[13px] focus:outline-none focus:border-primary"></div><div class="grid grid-cols-2 gap-2"><div><label class="font-semibold text-on-surface text-[12px] block mb-1">일정 유형</label><div class="flex gap-1"><button type="button" class="flex-1 py-1 rounded text-[11px] font-semibold bg-[#FFEDD5] text-[#9A3412] border border-[#FDBA74]">촬영</button><button type="button" class="flex-1 py-1 rounded text-[11px] font-medium bg-surface text-tertiary border border-outline-variant">연습</button><button type="button" class="flex-1 py-1 rounded text-[11px] font-medium bg-surface text-tertiary border border-outline-variant">회의</button></div></div><div><label class="font-semibold text-on-surface text-[12px] block mb-1">장소 (Venue)</label><select class="w-full h-8 px-2 border border-outline-variant rounded bg-surface text-on-surface text-[12px]"><option selected="">A Studio</option><option>C Studio</option><option>회의실</option></select></div></div><div class="grid grid-cols-2 gap-2"><div><label class="font-semibold text-on-surface text-[12px] block mb-1">시작 시간</label><input type="time" value="14:30" class="w-full h-8 px-2 border border-outline-variant rounded bg-surface text-on-surface text-[12px]"></div><div><label class="font-semibold text-on-surface text-[12px] block mb-1">종료 시간</label><input type="time" value="18:00" class="w-full h-8 px-2 border border-outline-variant rounded bg-surface text-on-surface text-[12px]"></div></div><div class="flex flex-col gap-1"><label class="font-semibold text-on-surface text-[12px]">참여자 (인원 관리)</label><div class="flex flex-wrap gap-1.5 p-2 bg-surface rounded border border-outline-variant text-[11px]"><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-medium rounded-full">최유진 <button class="text-[10px] text-tertiary hover:text-error">×</button></span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-medium rounded-full">김태호 <button class="text-[10px] text-tertiary hover:text-error">×</button></span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-medium rounded-full">이민우 <button class="text-[10px] text-tertiary hover:text-error">×</button></span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-medium rounded-full">정다은 <button class="text-[10px] text-tertiary hover:text-error">×</button></span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-medium rounded-full">박서준 <button class="text-[10px] text-tertiary hover:text-error">×</button></span><button class="px-1.5 py-0.5 text-primary text-[11px] font-semibold">+ 추가</button></div></div><div class="flex flex-col gap-1"><label class="font-semibold text-on-surface text-[12px]">메모 / 특이사항</label><input type="text" value="풀 샷 &amp; 크레인 무빙 준비" class="h-8 px-2.5 border border-outline-variant rounded bg-surface text-on-surface text-[12px] focus:outline-none focus:border-primary"></div></div><div class="flex items-center justify-between border-t border-outline-variant pt-3 mt-1"><button type="button" onclick="document.getElementById('schedule-edit-modal').classList.add('hidden')" class="px-3 py-1.5 border border-error text-error text-[12px] font-semibold rounded hover:bg-error-container transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">delete</span>일정 삭제</button><div class="flex items-center gap-2"><button type="button" onclick="document.getElementById('schedule-edit-modal').classList.add('hidden')" class="px-3 py-1.5 border border-outline-variant text-tertiary text-[12px] font-medium rounded hover:bg-surface-container transition-colors">취소</button><button type="button" onclick="document.getElementById('schedule-edit-modal').classList.add('hidden')" class="px-4 py-1.5 bg-primary text-white text-[12px] font-semibold rounded hover:bg-secondary transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check</span>수정 완료</button></div></div></div></div></body></html>

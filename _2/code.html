@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SyncTime - 전체 가능 시간 히트맵 &amp; 일정 생성</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-secondary": "#ffffff",
+            "on-background": "#0b1c30",
+            "secondary-fixed-dim": "#b7c4ff",
+            "secondary-fixed": "#dce1ff",
+            "on-tertiary-fixed-variant": "#3f465c",
+            "tertiary-fixed-dim": "#bec6e0",
+            "surface-container": "#e5eeff",
+            "surface-container-high": "#dce9ff",
+            "on-secondary-fixed-variant": "#0039b5",
+            "on-tertiary-fixed": "#131b2e",
+            "on-surface": "#0b1c30",
+            "tertiary": "#4d556b",
+            "surface-variant": "#d3e4fe",
+            "tertiary-container": "#656d84",
+            "error-container": "#ffdad6",
+            "outline": "#737686",
+            "surface": "#f8f9ff",
+            "secondary": "#1d4ed8",
+            "on-error": "#ffffff",
+            "on-tertiary-container": "#eef0ff",
+            "primary": "#004ac6",
+            "surface-container-low": "#eff4ff",
+            "surface-container-highest": "#d3e4fe",
+            "surface-tint": "#0053db",
+            "background": "#f8f9ff",
+            "outline-variant": "#c3c6d7",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "inverse-on-surface": "#eaf1ff",
+            "primary-fixed": "#dbe1ff",
+            "on-secondary-fixed": "#001551",
+            "on-tertiary": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "surface-dim": "#cbdbf5",
+            "primary-container": "#2563eb",
+            "tertiary-fixed": "#dae2fd",
+            "error": "#ba1a1a",
+            "on-primary-fixed": "#00174b",
+            "on-surface-variant": "#434655",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-primary-container": "#eeefff",
+            "secondary-container": "#4069f2",
+            "inverse-surface": "#213145",
+            "on-secondary-container": "#fffbff",
+            "surface-bright": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "0.75rem",
+            "space-md": "0.5rem",
+            "gutter-mobile": "0.25rem",
+            "space-xs": "0.125rem",
+            "gutter": "0.5rem",
+            "space-xl": "1rem",
+            "margin": "1rem",
+            "margin-mobile": "0.75rem",
+            "space-sm": "0.25rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "time-mono": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-sm": ["Inter"]
+          },
+          "fontSize": {
+            "title-md": ["14px", { "lineHeight": "18px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "time-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "title-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3c6d7;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-surface-variant min-h-screen flex flex-col justify-between">
+<!-- Top App Bar (Shared Component Anchor) -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flat flex justify-between items-center w-full h-11 px-space-xl max-w-full shadow-none">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="calendar_month">calendar_month</span>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface">SyncTime</span>
+<span class="ml-space-sm text-label-sm font-label-sm px-space-sm py-0.5 bg-surface-container text-primary font-semibold rounded">프로젝트 X</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-label-sm font-label-sm text-tertiary bg-surface-container-low border border-outline-variant px-space-sm py-0.5 rounded font-mono">CODE: SYNC-882</span>
+<button class="text-label-md font-label-md text-primary dark:text-inverse-primary hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors duration-150 px-space-sm py-1 rounded" type="button">공유</button>
+</div>
+</header>
+<!-- Project Meta Strip -->
+<section class="bg-surface-container-lowest border-b border-outline-variant px-space-xl py-space-sm flex flex-wrap items-center justify-between gap-y-1"><div class="flex items-center gap-2 text-label-sm font-label-sm"><div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low text-on-surface font-medium"><span class="material-symbols-outlined text-secondary" style="font-size: 14px;">group</span><span class="">참여자 5/5명 완료</span></div><span class="text-[11px] text-tertiary">(미입력 0)</span></div><div class="flex items-center gap-1 bg-surface-container-low p-0.5 rounded"><button class="px-2.5 py-0.5 text-label-sm font-semibold bg-surface-container-lowest text-primary rounded shadow-xs">히트맵</button><button class="px-2.5 py-0.5 text-label-sm text-tertiary hover:text-on-surface transition-colors flex items-center gap-1"><span class="">추천 TOP 3</span><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span></button></div></section>
+<!-- TOP 3 Quick Ribbon -->
+<section class="bg-surface-container-low border-b border-outline-variant px-space-xl py-1 flex items-center justify-between text-label-sm font-label-sm">
+<div class="flex items-center gap-space-sm overflow-x-auto custom-scrollbar whitespace-nowrap py-0.5">
+<span class="font-semibold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt" style="font-size: 15px;">bolt</span> TOP 1
+      </span>
+<span class="text-on-surface font-title-sm">10/28(화) 14:00 ~ 18:00</span>
+<span class="px-1 py-0.2 bg-primary text-on-primary rounded text-[10px] font-bold">5/5 전원 가능</span>
+<span class="text-outline-variant">|</span>
+<span class="text-tertiary font-medium">TOP 2: 10/29(수) 10:00~13:00 (5/5)</span>
+<span class="text-outline-variant">|</span>
+<span class="text-tertiary font-medium">TOP 3: 10/27(월) 15:00~17:00 (4/5)</span>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-label-sm text-tertiary pl-space-md">
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-secondary rounded-xs"></span> 5명</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-primary-container rounded-xs"></span> 4명</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-surface-variant rounded-xs"></span> 3명</span>
+<span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-surface-container-high rounded-xs"></span> 1-2명</span>
+</div>
+</section>
+<!-- Matrix Canvas Body -->
+<main class="flex-1 w-full max-w-full overflow-hidden flex flex-col relative bg-surface">
+<!-- Pinned Days Header -->
+<div class="flex border-b border-outline-variant bg-surface-container-lowest z-10">
+<div class="w-14 shrink-0 text-center py-2 text-label-sm font-label-sm text-tertiary border-r border-outline-variant font-time-mono">
+        TIME
+      </div>
+<div class="grid grid-cols-7 flex-1 text-center divide-x divide-outline-variant">
+<!-- 10/27 월 (선택됨) -->
+<div class="py-1 bg-surface-container-low border-b-2 border-primary">
+<div class="text-label-sm font-label-sm font-semibold text-primary">월</div>
+<div class="text-time-mono font-time-mono font-bold text-primary">10.27</div>
+</div>
+<div class="py-1">
+<div class="text-label-sm font-label-sm text-tertiary">화</div>
+<div class="text-time-mono font-time-mono text-on-surface">10.28</div>
+</div>
+<div class="py-1">
+<div class="text-label-sm font-label-sm text-tertiary">수</div>
+<div class="text-time-mono font-time-mono text-on-surface">10.29</div>
+</div>
+<div class="py-1">
+<div class="text-label-sm font-label-sm text-tertiary">목</div>
+<div class="text-time-mono font-time-mono text-on-surface">10.30</div>
+</div>
+<div class="py-1">
+<div class="text-label-sm font-label-sm text-tertiary">금</div>
+<div class="text-time-mono font-time-mono text-on-surface">10.31</div>
+</div>
+<div class="py-1 bg-surface-container-lowest">
+<div class="text-label-sm font-label-sm text-secondary">토</div>
+<div class="text-time-mono font-time-mono text-secondary">11.01</div>
+</div>
+<div class="py-1 bg-surface-container-lowest">
+<div class="text-label-sm font-label-sm text-error">일</div>
+<div class="text-time-mono font-time-mono text-error">11.02</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Timetable Matrix Grid -->
+<div class="flex-1 overflow-y-auto custom-scrollbar flex pb-48">
+<!-- Time Gutter -->
+<div class="w-14 shrink-0 bg-surface-container-lowest border-r border-outline-variant divide-y divide-outline-variant font-time-mono text-tertiary text-right pr-2">
+<div class="h-10 text-[10px] pt-1">13:00</div>
+<div class="h-10 text-[10px] pt-1">13:30</div>
+<div class="h-10 text-[10px] pt-1">14:00</div>
+<div class="h-10 text-[10px] pt-1">14:30</div>
+<div class="h-10 text-[10px] pt-1 text-primary font-bold">15:00</div>
+<div class="h-10 text-[10px] pt-1 text-primary font-bold">15:30</div>
+<div class="h-10 text-[10px] pt-1 text-primary font-bold">16:00</div>
+<div class="h-10 text-[10px] pt-1 text-primary font-bold">16:30</div>
+<div class="h-10 text-[10px] pt-1">17:00</div>
+<div class="h-10 text-[10px] pt-1">17:30</div>
+<div class="h-10 text-[10px] pt-1">18:00</div>
+<div class="h-10 text-[10px] pt-1">18:30</div>
+</div>
+<!-- 7 Columns Data Cells -->
+<div class="grid grid-cols-7 flex-1 divide-x divide-outline-variant bg-surface-container-lowest">
+<!-- Day 1: 월 10.27 (Contains target selected slot 15:00 ~ 17:00) -->
+<div class="flex flex-col divide-y divide-outline-variant">
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono text-on-surface">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono text-on-surface">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono font-bold">4/5</div>
+<!-- SELECTED SLOT 15:00 ~ 17:00 (4 blocks) -->
+<div class="h-10 bg-primary-container text-on-primary ring-2 ring-inset ring-primary flex items-center justify-between px-1 text-label-sm font-time-mono font-bold relative">
+<span class="">4/5</span>
+<span class="text-[9px] bg-on-primary/20 px-1 py-0.2 rounded font-sans">선택</span>
+</div>
+<div class="h-10 bg-primary-container text-on-primary ring-2 ring-inset ring-primary flex items-center justify-center text-label-sm font-time-mono font-bold">
+            4/5
+          </div>
+<div class="h-10 bg-primary-container text-on-primary ring-2 ring-inset ring-primary flex items-center justify-center text-label-sm font-time-mono font-bold">
+            4/5
+          </div>
+<div class="h-10 bg-primary-container text-on-primary ring-2 ring-inset ring-primary flex items-center justify-center text-label-sm font-time-mono font-bold">
+            4/5
+          </div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono text-on-surface">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">0/5</div>
+</div>
+<!-- Day 2: 화 10.28 (TOP 1 slot 14:00 ~ 18:00) -->
+<div class="flex flex-col divide-y divide-outline-variant">
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<!-- 5/5 block -->
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+</div>
+<!-- Day 3: 수 10.29 -->
+<div class="flex flex-col divide-y divide-outline-variant">
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+</div>
+<!-- Day 4: 목 10.30 -->
+<div class="flex flex-col divide-y divide-outline-variant">
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+</div>
+<!-- Day 5: 금 10.31 -->
+<div class="flex flex-col divide-y divide-outline-variant">
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-secondary text-on-primary font-bold text-label-sm font-time-mono">5/5</div>
+<div class="h-10 flex items-center justify-center bg-primary-container text-on-primary text-label-sm font-time-mono">4/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+</div>
+<!-- Day 6: 토 11.01 -->
+<div class="flex flex-col divide-y divide-outline-variant bg-surface-container-low/40">
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-variant text-label-sm font-time-mono">3/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+</div>
+<!-- Day 7: 일 11.02 -->
+<div class="flex flex-col divide-y divide-outline-variant bg-surface-container-low/40">
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-high text-label-sm font-time-mono text-tertiary">2/5</div>
+<div class="h-10 flex items-center justify-center bg-surface-container-lowest text-label-sm font-time-mono text-outline">1/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+<div class="h-10 flex items-center justify-center text-label-sm font-time-mono text-outline">0/5</div>
+</div>
+</div>
+</div>
+<!-- Active Selection & Conflict Schedule Modal / Bottom Sheet -->
+<section class="absolute bottom-14 left-0 right-0 z-30 bg-surface-container-lowest border-t-2 border-primary shadow-xl rounded-t-lg max-h-[82vh] overflow-y-auto custom-scrollbar flex flex-col">
+<!-- Modal Handle Bar & Title -->
+<div class="px-space-xl pt-space-md pb-space-sm border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest sticky top-0 z-20"><div class="flex items-center gap-2"><span class="w-1 h-3.5 bg-primary rounded-full"></span><h2 class="text-title-md font-semibold text-on-surface">새 일정 등록</h2></div><div class="text-time-mono font-medium text-primary bg-primary/10 px-2 py-0.5 rounded text-label-sm">10.27(월) 15:00 - 17:00 (2시간)</div></div>
+<div class="p-space-xl space-y-space-md"><div class="border border-error/30 bg-error-container/20 rounded p-2.5"><div class="flex items-center justify-between pb-1.5 mb-1.5 border-b border-error/20"><div class="flex items-center gap-1 text-error font-title-sm"><span class="material-symbols-outlined text-error" style="font-size: 15px;">warning</span><span class="font-medium">일정 충돌 주의 (4/5명 가능)</span></div><span class="text-time-mono text-error font-semibold text-label-sm">참여율 80%</span></div><div class="space-y-1 text-label-sm"><div class="flex items-center gap-1.5"><span class="text-tertiary text-body-sm shrink-0">가능:</span><div class="flex flex-wrap gap-1"><span class="bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded text-[11px]">이민우</span><span class="bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded text-[11px]">박서준</span><span class="bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded text-[11px]">정다은</span><span class="bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded text-[11px]">최유진</span></div></div><div class="flex items-center gap-1.5 pt-0.5"><span class="text-error text-body-sm shrink-0">불가:</span><span class="bg-error-container text-on-error-container px-1.5 py-0.2 rounded text-[11px] font-medium">김태호 (개인 외주 일정)</span></div></div></div><div class=""><label class="block text-label-sm text-tertiary mb-1 font-medium">일정명</label><input class="w-full h-8 px-2.5 text-body-md text-on-surface bg-surface-container-lowest border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" value="메인 씬 동선 리허설"></div><div class=""><label class="block text-label-sm text-tertiary mb-1 font-medium">장소 선택</label><div class="flex items-center gap-1.5 flex-wrap"><button class="h-7 px-2.5 text-label-sm rounded border border-primary bg-primary text-on-primary font-medium flex items-center gap-1" type="button"><span class="material-symbols-outlined" style="font-size: 14px;">check</span>A Studio</button><button class="h-7 px-2.5 text-label-sm rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button">C Studio</button><button class="h-7 px-2.5 text-label-sm rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors" type="button">회의실</button></div></div><div class=""><label class="block text-label-sm text-tertiary mb-1 font-medium">일정 종류 태그</label><div class="flex items-center gap-1.5 flex-wrap"><button class="h-6 px-2 text-[11px] font-medium rounded border border-[#86EFAC] bg-[#F0FDF4] text-[#14532D] ring-1 ring-[#14532D]" type="button">연습 ✓</button><button class="h-6 px-2 text-[11px] font-medium rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">촬영</button><button class="h-6 px-2 text-[11px] font-medium rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">회의</button><button class="h-6 px-2 text-[11px] font-medium rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">식사</button><button class="h-6 px-2 text-[11px] font-medium rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">세팅</button><button class="h-6 px-2 text-[11px] font-medium rounded border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low transition-colors" type="button">기타</button></div></div><div class="pt-1 grid grid-cols-2 gap-2 border-t border-outline-variant"><button class="h-9 px-3 bg-surface-container-lowest text-on-surface border border-outline-variant rounded text-label-md font-medium hover:bg-surface-container-low transition-colors" type="button">다른 시간 선택</button><button class="h-9 px-3 bg-primary text-on-primary rounded text-label-md font-semibold hover:bg-secondary transition-colors flex items-center justify-center gap-1 shadow-xs" type="button"><span class="">그래도 저장</span><span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span></button></div></div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Shared Component Anchor) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-14 px-space-sm pb-safe bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline flat shadow-none">
+<!-- Tab 1: 내 가능시간 (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person_check">person_check</span>
+<span class="text-label-sm font-label-sm mt-0.5">내 가능시간</span>
+</a>
+<!-- Tab 2: 전체 히트맵 (Active - Matches Intent Exactly) -->
+<a class="flex flex-col items-center justify-center bg-surface-container dark:bg-surface-variant text-primary dark:text-primary-fixed rounded py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="text-label-sm font-label-sm font-semibold mt-0.5">전체 히트맵</span>
+</a>
+<!-- Tab 3: 타임테이블 (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant py-1 px-space-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-label-sm font-label-sm mt-0.5">타임테이블</span>
+</a>
+<!-- Tab 4: 일정 목록 (Inactive) -->
+
+</nav>
+
+
+</body></html>
