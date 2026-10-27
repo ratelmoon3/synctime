@@ -14,4 +14,15 @@ test('frontend restores API data and sends availability to the participant endpo
  const save=calls.find(x=>x.method==='PUT');assert.equal(save.url,'/api/groups/11/participants/22/availability');assert.deepEqual(JSON.parse(save.body).slots,g.members[0].slots);
  assert(vm.runInContext('inviteLink()',c).includes('join=SYNC-ABC123'));
  assert(!fs.readFileSync(require('node:path').join(__dirname,'../script.js'),'utf8').includes('localStorage'));
+ // Export every day of the current week even on mobile, and escape user content.
+ let exported='';
+ c.window.open=()=>({opener:c.window,document:{write:html=>exported=html,close(){}},focus(){},print(){}});
+ vm.runInContext(`view='timetable';mobile.matches=true;group().events=[{id:'33',title:'<script>alert(1)</script>',description:'Full description',date:'2026-10-27',start:540,end:600,color:'#2563eb',members:['22']}];exportTimetablePdf()`,c);
+ assert.equal((exported.match(/class="day"/g)||[]).length,7);
+ assert(exported.includes('&lt;script&gt;alert(1)&lt;/script&gt;'));
+ assert(!exported.includes('<script>alert(1)</script>'));
+ assert(exported.includes('Full description'));
+ assert(exported.includes('A4 landscape'));
+ c.window.open=()=>null;
+ assert.doesNotThrow(()=>vm.runInContext('exportTimetablePdf()',c));
 });
